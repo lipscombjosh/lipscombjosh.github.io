@@ -3,171 +3,1898 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Josh Lipscomb | Cybersecurity & IT Professional</title>
+    <title>Josh Lipscomb | IT & Cybersecurity Professional</title>
+    <meta name="description" content="Josh Lipscomb — Cybersecurity-focused IT professional based in Wilmington, NC. UNCW graduate specializing in endpoint diagnostics, vulnerability analysis, and hardware remediation.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
     <style>
-        /* Smooth scrolling for the whole page */
-        html {
-            scroll-behavior: smooth;
+        /* ===================== */
+        /*   CSS CUSTOM PROPS    */
+        /* ===================== */
+        :root {
+            --bg-deep:        #0a0d13;
+            --bg-card:        #111827;
+            --bg-elevated:    #1b2438;
+            --text-primary:   #f0f4ff;
+            --text-secondary: #94a3b8;
+            --text-muted:     #4b5975;
+            --blue:           #3b82f6;
+            --cyan:           #06b6d4;
+            --blue-glow:      rgba(59,130,246,0.25);
+            --cyan-glow:      rgba(6,182,212,0.18);
+            --border:         rgba(255,255,255,0.06);
+            --border-blue:    rgba(59,130,246,0.28);
+            --font-display:   'Space Grotesk', sans-serif;
+            --font-body:      'Inter', sans-serif;
+            --font-mono:      'JetBrains Mono', monospace;
+            --ease:           cubic-bezier(0.4,0,0.2,1);
+            --nav-h:          68px;
         }
-        
+
+        /* ===================== */
+        /*   RESET & BASE        */
+        /* ===================== */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #121212;
-            color: #e0e0e0;
-            margin: 0;
-            padding: 0;
-            line-height: 1.6;
-            overflow-x: hidden; /* Prevents horizontal scroll on animations */
+            font-family: var(--font-body);
+            background: var(--bg-deep);
+            color: var(--text-primary);
+            line-height: 1.65;
+            overflow-x: hidden;
         }
-        
-        header {
-            background-color: #1e1e1e;
-            padding: 50px 20px;
+        img { display: block; max-width: 100%; }
+        a { text-decoration: none; }
+        ul { list-style: none; }
+
+        /* ===================== */
+        /*   NAV                 */
+        /* ===================== */
+        nav {
+            position: fixed;
+            inset: 0 0 auto 0;
+            z-index: 200;
+            height: var(--nav-h);
+            background: rgba(10,13,19,0.82);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 36px;
+        }
+
+        .nav-logo {
+            font-family: var(--font-display);
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            cursor: pointer;
+            letter-spacing: -0.02em;
+            user-select: none;
+        }
+        .nav-logo .dot { color: var(--blue); }
+
+        .nav-links {
+            display: flex;
+            gap: 4px;
+            align-items: center;
+        }
+        .nav-links a {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            padding: 7px 15px;
+            border-radius: 7px;
+            border: 1px solid transparent;
+            cursor: pointer;
+            transition: all 0.25s var(--ease);
+        }
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--blue);
+            background: var(--blue-glow);
+            border-color: var(--border-blue);
+        }
+
+        /* hamburger */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 8px;
+        }
+        .hamburger span {
+            display: block;
+            width: 22px;
+            height: 2px;
+            background: var(--text-primary);
+            border-radius: 2px;
+            transition: all 0.3s var(--ease);
+        }
+        .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+        .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+        /* mobile drawer */
+        .mobile-drawer {
+            display: none;
+            position: fixed;
+            top: var(--nav-h);
+            inset-inline: 0;
+            background: rgba(10,13,19,0.96);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            padding: 16px 20px 24px;
+            z-index: 199;
+        }
+        .mobile-drawer.open { display: block; }
+        .mobile-drawer a {
+            display: block;
+            padding: 13px 16px;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s var(--ease);
+        }
+        .mobile-drawer a:hover,
+        .mobile-drawer a.active {
+            color: var(--blue);
+            background: var(--blue-glow);
+        }
+
+        /* ===================== */
+        /*   PAGE SYSTEM         */
+        /* ===================== */
+        .page {
+            display: none;
+            min-height: 100vh;
+        }
+        .page.active {
+            display: block;
+            animation: pg-in 0.38s var(--ease) both;
+        }
+        @keyframes pg-in {
+            from { opacity: 0; transform: translateY(14px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ===================== */
+        /*   HOME / HERO         */
+        /* ===================== */
+        #page-home {
+            position: relative;
+            overflow: hidden;
+        }
+        #hero-canvas {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+        /* subtle radial vignette */
+        #page-home::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse 80% 70% at 50% 50%, transparent 30%, rgba(10,13,19,0.55) 100%);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .hero-inner {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: calc(var(--nav-h) + 40px) 24px 60px;
             text-align: center;
-            border-bottom: 3px solid #3b82f6;
-            animation: fadeInDown 0.8s ease-out;
         }
-        
-        h1 { color: #ffffff; margin-bottom: 5px; font-size: 2.5em; }
-        h2 { color: #3b82f6; border-bottom: 1px solid #333; padding-bottom: 10px; margin-top: 0; }
-        h3 { color: #ffffff; margin-bottom: 10px; }
-        p.subtitle { color: #a0a0a0; font-size: 1.2em; margin-top: 0; margin-bottom: 25px; }
-        
-        .container { max-width: 1000px; margin: 0 auto; padding: 20px; }
-        
-        /* Fade-in Animation Classes */
-        .section { 
-            margin-bottom: 40px; 
-            background-color: #1e1e1e; 
-            padding: 25px; 
-            border-radius: 8px; 
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-            opacity: 0; /* Hidden by default for animation */
-            transform: translateY(20px);
-            animation: fadeInUp 0.8s ease-out forwards;
-        }
-        
-        /* Stagger the loading times of the sections */
-        .section:nth-child(1) { animation-delay: 0.2s; }
-        .section:nth-child(2) { animation-delay: 0.4s; }
-        .section:nth-child(3) { animation-delay: 0.6s; }
 
-        /* Interactive Buttons */
-        .button {
+        .hero-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            border: 1px solid var(--border-blue);
+            border-radius: 100px;
+            background: var(--blue-glow);
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--cyan);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 28px;
+            opacity: 0;
+            animation: hero-up 0.55s var(--ease) 0.25s forwards;
+        }
+        .hero-chip-dot {
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: var(--cyan);
+            animation: pls 2s ease-in-out infinite;
+        }
+        @keyframes pls {
+            0%,100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .hero-name {
+            font-family: var(--font-display);
+            font-size: clamp(3.2rem, 9vw, 7rem);
+            font-weight: 700;
+            letter-spacing: -0.035em;
+            line-height: 0.95;
+            margin-bottom: 24px;
+            opacity: 0;
+            animation: hero-up 0.55s var(--ease) 0.4s forwards;
+        }
+        .hero-name .first { color: var(--text-primary); }
+        .hero-name .last {
+            display: block;
+            color: transparent;
+            -webkit-text-stroke: 2px var(--blue);
+        }
+
+        .hero-typewriter {
+            font-family: var(--font-mono);
+            font-size: clamp(0.95rem, 2.2vw, 1.25rem);
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            min-height: 1.8em;
+            opacity: 0;
+            animation: hero-up 0.55s var(--ease) 0.55s forwards;
+        }
+        .cursor-blink {
             display: inline-block;
-            background-color: #3b82f6;
-            color: #ffffff;
-            padding: 10px 25px;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-            margin: 5px;
-            transition: all 0.3s ease; /* Smooth transition for hover */
+            width: 2px;
+            height: 1em;
+            background: var(--blue);
+            margin-left: 2px;
+            vertical-align: -1px;
+            animation: blink 0.8s step-end infinite;
         }
-        
-        .button:hover { 
-            background-color: #2563eb; 
-            transform: translateY(-2px); /* Moves button up slightly */
-            box-shadow: 0 0 15px rgba(59, 130, 246, 0.6); /* Adds a neon blue glow */
+        @keyframes blink {
+            0%,100% { opacity: 1; }
+            50%      { opacity: 0; }
         }
 
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        
-        /* Interactive Project Cards */
-        .card { 
-            background-color: #2a2a2a; 
-            padding: 20px; 
-            border-radius: 8px; 
-            border-left: 4px solid #3b82f6; 
-            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Prepares card for hover */
+        .hero-stats {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 48px;
+            opacity: 0;
+            animation: hero-up 0.55s var(--ease) 0.7s forwards;
         }
-        
-        .card:hover {
-            transform: translateY(-8px); /* Lifts the card off the page */
-            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.15); /* Soft blue shadow underneath */
+        .hero-stat-num {
+            font-family: var(--font-display);
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--blue);
+            display: block;
+            line-height: 1;
         }
-
-        img.placeholder { 
-            width: 100%; 
-            height: 200px; 
-            background-color: #333; 
-            object-fit: cover; 
-            border-radius: 5px; 
-            margin-bottom: 15px; 
-            transition: opacity 0.3s ease;
-        }
-        
-        .card:hover img.placeholder {
-            opacity: 0.8; /* Dims the image slightly when card is hovered */
+        .hero-stat-lbl {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 4px;
         }
 
-        /* Keyframes for the Animations */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+        .hero-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+            opacity: 0;
+            animation: hero-up 0.55s var(--ease) 0.85s forwards;
         }
-        
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-30px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes hero-up {
+            from { opacity: 0; transform: translateY(22px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ===================== */
+        /*   BUTTONS             */
+        /* ===================== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 11px 26px;
+            border-radius: 8px;
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: all 0.25s var(--ease);
+        }
+        .btn-primary {
+            background: var(--blue);
+            color: #fff;
+            border-color: var(--blue);
+        }
+        .btn-primary:hover {
+            background: #2563eb;
+            border-color: #2563eb;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px var(--blue-glow);
+        }
+        .btn-ghost {
+            background: transparent;
+            color: var(--text-primary);
+            border-color: var(--border);
+        }
+        .btn-ghost:hover {
+            border-color: var(--blue);
+            color: var(--blue);
+            background: var(--blue-glow);
+            transform: translateY(-2px);
+        }
+
+        /* ===================== */
+        /*   SHARED PAGE LAYOUT  */
+        /* ===================== */
+        .page-wrap {
+            max-width: 1020px;
+            margin: 0 auto;
+            padding: calc(var(--nav-h) + 52px) 24px 80px;
+        }
+
+        .page-hd {
+            margin-bottom: 52px;
+        }
+        .eyebrow {
+            display: block;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--cyan);
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+        .page-title {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            color: var(--text-primary);
+            line-height: 1;
+        }
+
+        /* ===================== */
+        /*   ABOUT               */
+        /* ===================== */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 52px;
+            align-items: start;
+        }
+
+        .about-photo-col {
+            position: sticky;
+            top: calc(var(--nav-h) + 32px);
+        }
+        .photo-frame {
+            width: 100%;
+            aspect-ratio: 4/5;
+            border-radius: 14px;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-blue);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 10px;
+            color: var(--text-muted);
+        }
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .photo-frame i { font-size: 2.8rem; color: var(--blue); opacity: 0.3; }
+        .photo-frame p { font-family: var(--font-mono); font-size: 0.78rem; }
+
+        .about-loc {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            margin-top: 14px;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+        .about-loc i { color: var(--blue); }
+
+        .about-body p {
+            color: var(--text-secondary);
+            margin-bottom: 18px;
+            line-height: 1.8;
+        }
+        .about-body p:first-child {
+            font-size: 1.08rem;
+            color: var(--text-primary);
+        }
+
+        .skills-label {
+            font-family: var(--font-display);
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 32px 0 14px;
+        }
+        .tag-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 13px;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+            color: var(--text-secondary);
+            transition: all 0.22s var(--ease);
+        }
+        .tag:hover {
+            border-color: var(--blue);
+            color: var(--blue);
+            background: var(--blue-glow);
+        }
+
+        /* ===================== */
+        /*   EXPERIENCE TIMELINE */
+        /* ===================== */
+        .timeline {
+            position: relative;
+            padding-left: 36px;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 6px;
+            top: 10px;
+            width: 2px;
+            bottom: 20px;
+            background: linear-gradient(to bottom, var(--blue), var(--cyan) 60%, transparent);
+            border-radius: 2px;
+        }
+
+        .tl-item {
+            position: relative;
+            margin-bottom: 40px;
+        }
+        .tl-dot {
+            position: absolute;
+            left: -37px;
+            top: 7px;
+            width: 14px; height: 14px;
+            border-radius: 50%;
+            background: var(--blue);
+            border: 3px solid var(--bg-deep);
+            box-shadow: 0 0 10px var(--blue-glow);
+        }
+        .tl-dot.now {
+            background: var(--cyan);
+            box-shadow: 0 0 14px var(--cyan-glow);
+            animation: now-pulse 2.2s ease-in-out infinite;
+        }
+        @keyframes now-pulse {
+            0%,100% { box-shadow: 0 0 8px var(--cyan-glow); }
+            50%      { box-shadow: 0 0 22px rgba(6,182,212,0.45); }
+        }
+
+        .tl-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 26px 28px;
+            transition: border-color 0.25s var(--ease), transform 0.25s var(--ease);
+        }
+        .tl-card:hover {
+            border-color: var(--border-blue);
+            transform: translateX(5px);
+        }
+
+        .tl-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 6px;
+        }
+        .tl-role {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        .tl-company {
+            font-size: 0.88rem;
+            color: var(--blue);
+            font-weight: 500;
+            margin-top: 3px;
+        }
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 4px 11px;
+            border-radius: 100px;
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        .pill-active { background: rgba(6,182,212,0.1); border: 1px solid rgba(6,182,212,0.3); color: var(--cyan); }
+        .pill-past   { background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text-muted); }
+
+        .tl-date {
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+
+        .tl-bullets li {
+            position: relative;
+            padding-left: 18px;
+            color: var(--text-secondary);
+            font-size: 0.92rem;
+            line-height: 1.7;
+            margin-bottom: 8px;
+        }
+        .tl-bullets li::before {
+            content: '›';
+            position: absolute;
+            left: 0;
+            color: var(--blue);
+            font-size: 1.1rem;
+            line-height: 1.5;
+        }
+
+        .tl-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 18px;
+            padding-top: 18px;
+            border-top: 1px solid var(--border);
+        }
+        .chip {
+            padding: 3px 10px;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-family: var(--font-mono);
+            font-size: 0.73rem;
+            color: var(--text-muted);
+        }
+
+        /* ===================== */
+        /*   PROJECTS            */
+        /* ===================== */
+        .proj-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+            gap: 22px;
+        }
+
+        .proj-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            transition: border-color 0.25s var(--ease), transform 0.28s var(--ease), box-shadow 0.28s var(--ease);
+        }
+        .proj-card:hover {
+            border-color: var(--border-blue);
+            transform: translateY(-7px);
+            box-shadow: 0 20px 44px rgba(0,0,0,0.45);
+        }
+
+        .proj-thumb {
+            height: 148px;
+            background: var(--bg-elevated);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .proj-thumb-icon {
+            font-size: 2.8rem;
+            color: var(--blue);
+            opacity: 0.38;
+            transition: all 0.28s var(--ease);
+        }
+        .proj-card:hover .proj-thumb-icon {
+            opacity: 0.7;
+            transform: scale(1.12);
+        }
+        .proj-thumb-gradient {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, transparent 50%, var(--bg-card));
+        }
+        .proj-thumb img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            position: absolute;
+            inset: 0;
+        }
+
+        .proj-body {
+            padding: 22px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .proj-cat {
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            color: var(--cyan);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 7px;
+        }
+        .proj-name {
+            font-family: var(--font-display);
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            line-height: 1.3;
+            margin-bottom: 10px;
+        }
+        .proj-desc {
+            font-size: 0.86rem;
+            color: var(--text-secondary);
+            line-height: 1.68;
+            flex: 1;
+            margin-bottom: 18px;
+        }
+        .proj-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+        .proj-tag {
+            padding: 3px 9px;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+        .proj-more {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--blue);
+            margin-top: 14px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            opacity: 0;
+            transform: translateX(-4px);
+            transition: all 0.22s var(--ease);
+        }
+        .proj-card:hover .proj-more {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* MODALS */
+        .modal-bg {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 300;
+            background: rgba(0,0,0,0.72);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+        .modal-bg.open { display: flex; animation: bg-in 0.25s ease both; }
+        @keyframes bg-in { from { opacity:0; } to { opacity:1; } }
+
+        .modal-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-blue);
+            border-radius: 16px;
+            max-width: 580px;
+            width: 100%;
+            max-height: 82vh;
+            overflow-y: auto;
+            animation: modal-up 0.28s var(--ease) both;
+        }
+        @keyframes modal-up {
+            from { transform: translateY(18px); opacity:0; }
+            to   { transform: translateY(0); opacity:1; }
+        }
+        .modal-hd {
+            padding: 26px 26px 18px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        .modal-close {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.4rem;
+            line-height: 1;
+            cursor: pointer;
+            padding: 2px 6px;
+            border-radius: 4px;
+            transition: color 0.2s;
+            flex-shrink: 0;
+        }
+        .modal-close:hover { color: var(--text-primary); }
+        .modal-bd { padding: 22px 26px 28px; }
+        .modal-bd p {
+            color: var(--text-secondary);
+            font-size: 0.93rem;
+            line-height: 1.78;
+            margin-bottom: 14px;
+        }
+
+        /* ===================== */
+        /*   EDUCATION           */
+        /* ===================== */
+        .edu-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 28px;
+        }
+        .edu-hd {
+            padding: 28px 30px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            gap: 22px;
+            align-items: flex-start;
+        }
+        .edu-badge {
+            width: 58px; height: 58px;
+            flex-shrink: 0;
+            border-radius: 12px;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-display);
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--blue);
+            text-align: center;
+            line-height: 1.1;
+        }
+        .edu-degree {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+        .edu-school {
+            color: var(--blue);
+            font-size: 0.95rem;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+        .edu-meta {
+            font-family: var(--font-mono);
+            font-size: 0.77rem;
+            color: var(--text-muted);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+        }
+        .edu-meta span { display: flex; align-items: center; gap: 5px; }
+
+        .edu-bd { padding: 26px 30px; }
+
+        .gpa-row {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+        .gpa-box {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 16px 24px;
+            text-align: center;
+            min-width: 120px;
+        }
+        .gpa-num {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--cyan);
+            display: block;
+            line-height: 1;
+        }
+        .gpa-lbl {
+            font-family: var(--font-mono);
+            font-size: 0.68rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-top: 5px;
+        }
+
+        .course-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .course {
+            padding: 6px 14px;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 0.83rem;
+            color: var(--text-secondary);
+            transition: all 0.22s var(--ease);
+        }
+        .course:hover {
+            border-color: var(--blue);
+            color: var(--blue);
+        }
+
+        .cert-list { margin-top: 8px; }
+        .cert-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 14px 18px;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            margin-bottom: 8px;
+            transition: border-color 0.22s var(--ease);
+        }
+        .cert-row:hover { border-color: var(--border-blue); }
+        .cert-ico { font-size: 1.3rem; color: var(--blue); width: 28px; text-align: center; flex-shrink: 0; }
+        .cert-name { font-weight: 600; font-size: 0.93rem; color: var(--text-primary); }
+        .cert-sub { font-family: var(--font-mono); font-size: 0.74rem; color: var(--text-muted); }
+        .cert-pill {
+            margin-left: auto;
+            padding: 3px 10px;
+            border-radius: 100px;
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            white-space: nowrap;
+        }
+        .cert-pill-active { background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.3); color: #f59e0b; }
+        .cert-pill-plan   { background: var(--bg-card); border: 1px solid var(--border); color: var(--text-muted); }
+
+        /* ===================== */
+        /*   CONTACT             */
+        /* ===================== */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 52px;
+            align-items: start;
+        }
+        .contact-intro {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 32px;
+        }
+        .contact-links { display: flex; flex-direction: column; gap: 10px; }
+        .clink {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 15px 18px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: var(--text-primary);
+            transition: all 0.24s var(--ease);
+        }
+        .clink:hover {
+            border-color: var(--blue);
+            background: var(--blue-glow);
+            transform: translateX(5px);
+        }
+        .clink-ico {
+            width: 38px; height: 38px;
+            border-radius: 8px;
+            background: var(--bg-elevated);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--blue);
+            font-size: 1rem;
+            flex-shrink: 0;
+            transition: all 0.24s var(--ease);
+        }
+        .clink:hover .clink-ico { background: var(--blue); color: #fff; }
+        .clink-lbl {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+        .clink-val { font-weight: 500; font-size: 0.9rem; margin-top: 2px; }
+        .clink-arr { margin-left: auto; color: var(--text-muted); font-size: 0.8rem; }
+
+        .code-block {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 28px;
+            font-family: var(--font-mono);
+            font-size: 0.84rem;
+            line-height: 1.9;
+            color: var(--text-secondary);
+        }
+        .code-block .cmt { color: var(--text-muted); }
+        .code-block .key { color: var(--cyan); }
+        .code-block .str { color: #86efac; }
+        .code-block .bool { color: #fbbf24; }
+
+        /* ===================== */
+        /*   SCROLL REVEAL       */
+        /* ===================== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(22px);
+            transition: opacity 0.55s var(--ease), transform 0.55s var(--ease);
+        }
+        .reveal.in { opacity: 1; transform: translateY(0); }
+
+        /* ===================== */
+        /*   FOOTER              */
+        /* ===================== */
+        footer {
+            padding: 28px 24px;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+            color: var(--text-muted);
+        }
+        footer .accent { color: var(--cyan); }
+
+        /* ===================== */
+        /*   MEDIA QUERIES       */
+        /* ===================== */
+        @media (max-width: 800px) {
+            nav { padding: 0 20px; }
+            .nav-links { display: none; }
+            .hamburger { display: flex; }
+
+            .about-grid { grid-template-columns: 1fr; }
+            .about-photo-col { position: static; max-width: 200px; margin: 0 auto 8px; }
+
+            .contact-grid { grid-template-columns: 1fr; }
+            .code-block { display: none; } /* hide the JSON on small screens for space */
+
+            .hero-stats { gap: 22px; }
+            .hero-stat-num { font-size: 1.8rem; }
+
+            .timeline { padding-left: 24px; }
+            .tl-dot { left: -25px; }
+
+            .proj-grid { grid-template-columns: 1fr; }
+
+            .gpa-row { flex-wrap: wrap; }
+            .edu-hd { flex-direction: column; gap: 14px; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
         }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>Josh Lipscomb</h1>
-    <p class="subtitle">Cybersecurity-Focused IT Professional</p>
-    <a href="#" class="button">LinkedIn</a>
-    <a href="#" class="button">GitHub</a>
-</header>
-
-<div class="container">
-    <div class="section">
-        <h2>About Me</h2>
-        <p>I am an IT graduate from the University of North Carolina - Wilmington with a concentration in Cybersecurity. I specialize in endpoint diagnostics, vulnerability analysis, and hardware remediation. With a foundation in custom PC builds and malware remediation across Windows, macOS, iOS, and Android platforms, I bridge the gap between complex technical infrastructure and clear, actionable communication.</p>
+<!-- ===================== -->
+<!--         NAV           -->
+<!-- ===================== -->
+<nav id="nav">
+    <span class="nav-logo" onclick="go('home')">Josh<span class="dot">.</span></span>
+    <ul class="nav-links" id="nav-links">
+        <li><a data-pg="home"       onclick="go('home')">Home</a></li>
+        <li><a data-pg="about"      onclick="go('about')">About</a></li>
+        <li><a data-pg="experience" onclick="go('experience')">Experience</a></li>
+        <li><a data-pg="projects"   onclick="go('projects')">Projects</a></li>
+        <li><a data-pg="education"  onclick="go('education')">Education</a></li>
+        <li><a data-pg="contact"    onclick="go('contact')">Contact</a></li>
+    </ul>
+    <div class="hamburger" id="burger" onclick="toggleDrawer()">
+        <span></span><span></span><span></span>
     </div>
+</nav>
 
-    <div class="section">
-        <h2>Professional Experience</h2>
-        <div class="card" style="margin-bottom: 20px;">
-            <h3>End Device Repair Technician - Mr. Phix LLC</h3>
-            <p><em>May 2026 - Current | Wilmington, NC</em></p>
-            <ul>
-                <li>Log, triage, and track inbound service requests across multiple operating system platforms to ensure accurate resolution.</li>
-                <li>Enforce strict data privacy protocols during device repairs and endpoint remediations to safeguard customer data.</li>
-                <li>Restore systems and verify all devices meet OS baselines and security patch requirements prior to deployment.</li>
-            </ul>
+<!-- mobile drawer -->
+<div class="mobile-drawer" id="drawer">
+    <a data-pg="home"       onclick="go('home');closeDrawer()">Home</a>
+    <a data-pg="about"      onclick="go('about');closeDrawer()">About</a>
+    <a data-pg="experience" onclick="go('experience');closeDrawer()">Experience</a>
+    <a data-pg="projects"   onclick="go('projects');closeDrawer()">Projects</a>
+    <a data-pg="education"  onclick="go('education');closeDrawer()">Education</a>
+    <a data-pg="contact"    onclick="go('contact');closeDrawer()">Contact</a>
+</div>
+
+
+<!-- ===================== -->
+<!--    HOME / HERO        -->
+<!-- ===================== -->
+<div id="page-home" class="page active">
+    <canvas id="hero-canvas"></canvas>
+    <div class="hero-inner">
+
+        <div class="hero-chip">
+            <span class="hero-chip-dot"></span>
+            Available for Opportunities
         </div>
-        
-        <div class="card">
-            <h3>Golf Sales Associate - Dick's Sporting Goods</h3>
-            <p><em>Aug. 2024 - Current | Wilmington, NC</em></p>
-            <p>Leverage data-driven insights to provide high-performance equipment recommendations. I cultivate strong client relationships by translating complex, technical product specifications into easily understandable concepts for a diverse customer base.</p>
+
+        <h1 class="hero-name">
+            <span class="first">Josh </span><span class="last">Lipscomb</span>
+        </h1>
+
+        <div class="hero-typewriter">
+            <span id="tw"></span><span class="cursor-blink"></span>
+        </div>
+
+        <div class="hero-stats">
+            <div>
+                <span class="hero-stat-num">3.46</span>
+                <div class="hero-stat-lbl">Major GPA</div>
+            </div>
+            <div>
+                <span class="hero-stat-num">5+</span>
+                <div class="hero-stat-lbl">Yrs. Customer Service</div>
+            </div>
+            <div>
+                <span class="hero-stat-num">4</span>
+                <div class="hero-stat-lbl">OS Platforms</div>
+            </div>
+        </div>
+
+        <div class="hero-actions">
+            <a href="https://www.linkedin.com/in/lipscombjosh/" target="_blank" class="btn btn-primary">
+                <i class="fab fa-linkedin"></i> LinkedIn
+            </a>
+            <!-- Update href with your actual GitHub URL -->
+            <a href="https://github.com/" target="_blank" class="btn btn-ghost">
+                <i class="fab fa-github"></i> GitHub
+            </a>
+            <!-- Put JL_Resume.pdf in the same folder as index.html for this to work -->
+            <a href="JL_Resume.pdf" target="_blank" class="btn btn-ghost">
+                <i class="fas fa-file-arrow-down"></i> Resume
+            </a>
+            <span class="btn btn-ghost" onclick="go('contact')">
+                <i class="fas fa-envelope"></i> Contact
+            </span>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- ===================== -->
+<!--    ABOUT              -->
+<!-- ===================== -->
+<div id="page-about" class="page">
+    <div class="page-wrap">
+
+        <div class="page-hd reveal">
+            <span class="eyebrow">// who I am</span>
+            <h2 class="page-title">About Me</h2>
+        </div>
+
+        <div class="about-grid">
+            <div class="about-photo-col reveal">
+                <div class="photo-frame">
+                    <!--
+                        TO ADD YOUR PHOTO:
+                        Replace the div below with:
+                        <img src="photo.jpg" alt="Josh Lipscomb">
+                        and upload photo.jpg to the same folder as index.html
+                    -->
+                    <i class="fas fa-user-circle"></i>
+                    <p>// add your photo</p>
+                </div>
+                <div class="about-loc">
+                    <i class="fas fa-location-dot"></i> Wilmington, NC
+                </div>
+            </div>
+
+            <div class="about-body">
+                <p class="reveal">
+                    I'm a cybersecurity-focused IT professional fresh out of UNCW, where I earned a B.S. in Information Technology with a concentration in Cybersecurity. I specialize in endpoint diagnostics, vulnerability analysis, and hardware remediation across iOS, Android, macOS, and Windows — and I do it daily at Mr. Phix, where real devices come in broken and leave fixed.
+                </p>
+                <p class="reveal">
+                    My path into IT started the way most do: I was the person everyone called when something stopped working. That curiosity compounded into a degree, hands-on lab work in ethical hacking and network defense, and a genuine interest in how systems fail — and how to harden them before they do.
+                </p>
+                <p class="reveal">
+                    Outside of work, I build custom desktop PCs from component selection through OS deployment and manage my own in-wall network infrastructure. I believe the best IT professionals can explain a complex problem simply — a skill I've sharpened through five-plus years of customer-facing roles.
+                </p>
+
+                <div class="reveal">
+                    <div class="skills-label">Tools & Platforms</div>
+                    <div class="tag-cloud">
+                        <span class="tag"><i class="fab fa-windows"></i> Windows</span>
+                        <span class="tag"><i class="fab fa-apple"></i> macOS</span>
+                        <span class="tag"><i class="fas fa-mobile-screen-button"></i> iOS</span>
+                        <span class="tag"><i class="fab fa-android"></i> Android</span>
+                        <span class="tag"><i class="fas fa-shield-halved"></i> Malwarebytes</span>
+                        <span class="tag"><i class="fas fa-shield-halved"></i> Hitman Pro</span>
+                        <span class="tag"><i class="fas fa-server"></i> iMazing</span>
+                        <span class="tag"><i class="fas fa-ticket"></i> RepairDesk</span>
+                        <span class="tag"><i class="fas fa-database"></i> SQL</span>
+                        <span class="tag"><i class="fas fa-lock"></i> NIST SP 800-53</span>
+                        <span class="tag"><i class="fas fa-file-shield"></i> FISMA</span>
+                        <span class="tag"><i class="fas fa-microchip"></i> PC Hardware</span>
+                        <span class="tag"><i class="fas fa-network-wired"></i> Networking</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- ===================== -->
+<!--    EXPERIENCE         -->
+<!-- ===================== -->
+<div id="page-experience" class="page">
+    <div class="page-wrap">
+
+        <div class="page-hd reveal">
+            <span class="eyebrow">// where I've worked</span>
+            <h2 class="page-title">Experience</h2>
+        </div>
+
+        <div class="timeline">
+
+            <!-- Mr. Phix -->
+            <div class="tl-item reveal">
+                <div class="tl-dot now"></div>
+                <div class="tl-card">
+                    <div class="tl-top">
+                        <div>
+                            <div class="tl-role">End Device Repair Technician</div>
+                            <div class="tl-company">Mr. Phix LLC</div>
+                        </div>
+                        <span class="pill pill-active">
+                            <i class="fas fa-circle" style="font-size:0.45rem;"></i> Current
+                        </span>
+                    </div>
+                    <div class="tl-date">
+                        <i class="fas fa-calendar-alt"></i>&nbsp; May 2026 – Present &nbsp;·&nbsp; Wilmington, NC &nbsp;·&nbsp; Full-Time
+                    </div>
+                    <ul class="tl-bullets">
+                        <li>Log, triage, and track inbound service requests across iOS, Android, macOS, and Windows via RepairDesk — maintaining accurate documentation from intake through resolution.</li>
+                        <li>Enforce strict data privacy and chain-of-custody protocols during repairs, data migrations, and endpoint remediations to safeguard sensitive customer information.</li>
+                        <li>Deploy Malwarebytes and Hitman Pro for real-time threat detection and malware removal; use iMazing for secure encrypted device backups.</li>
+                        <li>Restore, update, and configure systems — verifying all devices meet current OS baselines and security patch requirements before returning to the customer.</li>
+                        <li>Analyze complex system failures and escalate critical security incidents for timely, accurate resolution.</li>
+                    </ul>
+                    <div class="tl-chips">
+                        <span class="chip">RepairDesk</span>
+                        <span class="chip">Malwarebytes</span>
+                        <span class="chip">Hitman Pro</span>
+                        <span class="chip">iMazing</span>
+                        <span class="chip">iOS</span>
+                        <span class="chip">Android</span>
+                        <span class="chip">macOS</span>
+                        <span class="chip">Windows</span>
+                        <span class="chip">Endpoint Security</span>
+                        <span class="chip">Data Privacy</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dick's Sporting Goods -->
+            <div class="tl-item reveal">
+                <div class="tl-dot now"></div>
+                <div class="tl-card">
+                    <div class="tl-top">
+                        <div>
+                            <div class="tl-role">Golf Sales Associate</div>
+                            <div class="tl-company">Dick's Sporting Goods</div>
+                        </div>
+                        <span class="pill pill-active">
+                            <i class="fas fa-circle" style="font-size:0.45rem;"></i> Current
+                        </span>
+                    </div>
+                    <div class="tl-date">
+                        <i class="fas fa-calendar-alt"></i>&nbsp; August 2024 – Present &nbsp;·&nbsp; Wilmington, NC &nbsp;·&nbsp; Part-Time
+                    </div>
+                    <ul class="tl-bullets">
+                        <li>Leverage data-driven product analytics to provide tailored, high-performance equipment recommendations — consistently contributing to departmental performance targets.</li>
+                        <li>Translate complex technical product specifications and performance metrics into accessible concepts for a diverse customer base.</li>
+                        <li>Built 5+ years of professional customer service and communication skills directly applicable to technical consulting and client-facing IT roles.</li>
+                    </ul>
+                    <div class="tl-chips">
+                        <span class="chip">Client Relations</span>
+                        <span class="chip">Product Analytics</span>
+                        <span class="chip">Technical Communication</span>
+                        <span class="chip">Sales</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Domino's Pizza -->
+            <div class="tl-item reveal">
+                <div class="tl-dot"></div>
+                <div class="tl-card">
+                    <div class="tl-top">
+                        <div>
+                            <div class="tl-role">Delivery Driver</div>
+                            <div class="tl-company">Domino's Pizza</div>
+                        </div>
+                        <span class="pill pill-past">Previous</span>
+                    </div>
+                    <div class="tl-date">
+                        <i class="fas fa-calendar-alt"></i>&nbsp; April 2023 – July 2023
+                    </div>
+                    <ul class="tl-bullets">
+                        <li>Managed order accuracy and on-time delivery in a high-volume, time-sensitive environment where mistakes were immediately visible to the customer.</li>
+                        <li>Operated the front register and supported staff across stations during peak periods.</li>
+                    </ul>
+                    <div class="tl-chips">
+                        <span class="chip">Time Management</span>
+                        <span class="chip">Customer Service</span>
+                        <span class="chip">POS Operation</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mountain Aire Golf Club -->
+            <div class="tl-item reveal">
+                <div class="tl-dot"></div>
+                <div class="tl-card">
+                    <div class="tl-top">
+                        <div>
+                            <div class="tl-role">Ranger</div>
+                            <div class="tl-company">Mountain Aire Golf Club</div>
+                        </div>
+                        <span class="pill pill-past">Previous</span>
+                    </div>
+                    <div class="tl-date">
+                        <i class="fas fa-calendar-alt"></i>&nbsp; April 2021 – October 2022
+                    </div>
+                    <ul class="tl-bullets">
+                        <li>Maintained consistent pace-of-play across the course for members and guests, balancing service quality against operational throughput.</li>
+                        <li>Supervised cart distribution and resource allocation to players, ensuring equipment was staged and available ahead of demand.</li>
+                        <li>Covered pro shop operations independently during periods when primary staff were occupied — handling member questions and transactions without supervision.</li>
+                        <li>Maintained course cleanliness and prepared returned carts for incoming players.</li>
+                    </ul>
+                    <div class="tl-chips">
+                        <span class="chip">Operations</span>
+                        <span class="chip">Member Relations</span>
+                        <span class="chip">Resource Allocation</span>
+                        <span class="chip">Independent Coverage</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ashe County Parks and Recreation -->
+            <div class="tl-item reveal">
+                <div class="tl-dot"></div>
+                <div class="tl-card">
+                    <div class="tl-top">
+                        <div>
+                            <div class="tl-role">Field Crew / Closer</div>
+                            <div class="tl-company">Ashe County Parks and Recreation</div>
+                        </div>
+                        <span class="pill pill-past">Previous</span>
+                    </div>
+                    <div class="tl-date">
+                        <i class="fas fa-calendar-alt"></i>&nbsp; September 2020 – May 2022
+                    </div>
+                    <ul class="tl-bullets">
+                        <li>Prepared and maintained athletic fields and grounds for public sports seasons, including outdoor landscaping and facility upkeep.</li>
+                        <li>Trusted with after-hours closing responsibility — securing facilities and overseeing orderly conduct of visitors without on-site supervision.</li>
+                        <li>Transported machinery and equipment between county locations.</li>
+                    </ul>
+                    <div class="tl-chips">
+                        <span class="chip">Facility Management</span>
+                        <span class="chip">Unsupervised Responsibility</span>
+                        <span class="chip">Public Service</span>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
+</div>
 
-    <div class="section">
-        <h2>Projects & Technical Skills</h2>
-        <div class="grid">
-            <div class="card">
-                <img src="placeholder1.jpg" alt="Hardware Project" class="placeholder">
-                <h3>Hardware & Development</h3>
-                <p>Extensive experience building custom desktop PC hardware and managing in-wall network infrastructure. Developer of custom Pine Script technical indicators on TradingView for algorithmic market analysis.</p>
+
+<!-- ===================== -->
+<!--    PROJECTS           -->
+<!-- ===================== -->
+<div id="page-projects" class="page">
+    <div class="page-wrap">
+
+        <div class="page-hd reveal">
+            <span class="eyebrow">// what I've built</span>
+            <h2 class="page-title">Projects</h2>
+        </div>
+
+        <div class="proj-grid">
+
+            <div class="proj-card reveal" onclick="openModal('m-fbi')">
+                <div class="proj-thumb">
+                    <!--
+                        ADD PROJECT IMAGE:
+                        <img src="fbi-ic3.jpg" alt="FBI IC3 Project">
+                    -->
+                    <i class="fas fa-shield-halved proj-thumb-icon"></i>
+                    <div class="proj-thumb-gradient"></div>
+                </div>
+                <div class="proj-body">
+                    <div class="proj-cat">Cybersecurity &nbsp;·&nbsp; Group Project</div>
+                    <div class="proj-name">FBI IC3 NIST Risk Assessment</div>
+                    <div class="proj-desc">Comprehensive FISMA/NIST SP 800-53 risk assessment of the FBI Internet Crime Complaint Center — analyzed 39 vulnerabilities and produced a formal ATO recommendation.</div>
+                    <div class="proj-tags">
+                        <span class="proj-tag">NIST SP 800-53</span>
+                        <span class="proj-tag">FISMA</span>
+                        <span class="proj-tag">Risk Assessment</span>
+                        <span class="proj-tag">ATO</span>
+                    </div>
+                    <div class="proj-more"><i class="fas fa-arrow-right"></i> View Details</div>
+                </div>
             </div>
-            <div class="card">
-                <img src="placeholder2.jpg" alt="Cybersecurity Project" class="placeholder">
-                <h3>FBI IC3 System Risk Assessment</h3>
-                <p>Evaluated compliance against FISMA and NIST SP 800-53 frameworks. Analyzed 39 system vulnerabilities to formulate a formal Authorization to Operate (ATO) recommendation.</p>
+
+            <div class="proj-card reveal" onclick="openModal('m-seaview')">
+                <div class="proj-thumb">
+                    <!--
+                        ADD PROJECT IMAGE:
+                        <img src="seaview.jpg" alt="Seaview Crab Project">
+                    -->
+                    <i class="fas fa-cash-register proj-thumb-icon"></i>
+                    <div class="proj-thumb-gradient"></div>
+                </div>
+                <div class="proj-body">
+                    <div class="proj-cat">IT Consulting &nbsp;·&nbsp; Capstone Project</div>
+                    <div class="proj-name">Seaview Crab Co. — POS Consolidation</div>
+                    <div class="proj-desc">Technical consultant for a multi-location seafood chain — evaluated fragmented POS systems, engineered data cleansing strategies, and delivered consolidation recommendations that improved data integrity.</div>
+                    <div class="proj-tags">
+                        <span class="proj-tag">POS Systems</span>
+                        <span class="proj-tag">Data Cleansing</span>
+                        <span class="proj-tag">IT Consulting</span>
+                        <span class="proj-tag">SQL</span>
+                    </div>
+                    <div class="proj-more"><i class="fas fa-arrow-right"></i> View Details</div>
+                </div>
             </div>
-            <div class="card">
-                <img src="placeholder3.jpg" alt="IT Strategy Project" class="placeholder">
-                <h3>POS System Consolidation</h3>
-                <p>Acted as a technical consultant for Seaview Crab Company to evaluate fragmented POS systems and deliver consolidation recommendations, improving data integrity and workflow.</p>
+
+            <div class="proj-card reveal" onclick="openModal('m-pc')">
+                <div class="proj-thumb">
+                    <!--
+                        ADD BUILD PHOTOS:
+                        <img src="pc-build.jpg" alt="Custom PC Build">
+                    -->
+                    <i class="fas fa-microchip proj-thumb-icon"></i>
+                    <div class="proj-thumb-gradient"></div>
+                </div>
+                <div class="proj-body">
+                    <div class="proj-cat">Hardware &nbsp;·&nbsp; Personal Project</div>
+                    <div class="proj-name">Custom PC Builds & Home Network</div>
+                    <div class="proj-desc">Full custom desktop builds from component selection through OS deployment, plus in-wall structured network cabling and access point configuration — hands-on hardware skills applied daily.</div>
+                    <div class="proj-tags">
+                        <span class="proj-tag">PC Hardware</span>
+                        <span class="proj-tag">Networking</span>
+                        <span class="proj-tag">BIOS / OS</span>
+                        <span class="proj-tag">Structured Cabling</span>
+                    </div>
+                    <div class="proj-more"><i class="fas fa-arrow-right"></i> View Details</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- ===================== -->
+<!--    EDUCATION          -->
+<!-- ===================== -->
+<div id="page-education" class="page">
+    <div class="page-wrap">
+
+        <div class="page-hd reveal">
+            <span class="eyebrow">// where I studied</span>
+            <h2 class="page-title">Education</h2>
+        </div>
+
+        <div class="edu-card reveal">
+            <div class="edu-hd">
+                <div class="edu-badge">UNC<br>W</div>
+                <div>
+                    <div class="edu-degree">B.S. Information Technology</div>
+                    <div class="edu-school">University of North Carolina – Wilmington</div>
+                    <div class="edu-meta">
+                        <span><i class="fas fa-calendar-alt"></i> Aug 2023 – May 2026</span>
+                        <span><i class="fas fa-location-dot"></i> Wilmington, NC</span>
+                        <span><i class="fas fa-tag"></i> Cybersecurity Concentration</span>
+                    </div>
+                </div>
+            </div>
+            <div class="edu-bd">
+                <div class="gpa-row">
+                    <div class="gpa-box">
+                        <span class="gpa-num">3.08</span>
+                        <div class="gpa-lbl">Cumulative GPA</div>
+                    </div>
+                    <div class="gpa-box">
+                        <span class="gpa-num">3.46</span>
+                        <div class="gpa-lbl">Major GPA</div>
+                    </div>
+                </div>
+
+                <div class="skills-label" style="margin-top:0;">Relevant Coursework</div>
+                <div class="course-cloud">
+                    <span class="course">Systems Network Administration</span>
+                    <span class="course">Relational Databases (SQL)</span>
+                    <span class="course">Software Development Life Cycle</span>
+                    <span class="course">Cyber Risk Management</span>
+                    <span class="course">Network Defense</span>
+                    <span class="course">Ethical Hacking</span>
+                </div>
+
+                <!--
+                    EDUCATION PHOTOS:
+                    Add images of your campus, graduation, projects, etc. here.
+                    Example:
+                    <div style="margin-top:24px; display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+                        <img src="campus.jpg" style="border-radius:8px;" alt="UNCW Campus">
+                        <img src="grad.jpg" style="border-radius:8px;" alt="Graduation">
+                    </div>
+                -->
+            </div>
+        </div>
+
+        <div class="edu-card reveal">
+            <div class="edu-hd">
+                <div class="edu-badge">WCC</div>
+                <div>
+                    <div class="edu-degree">Associate in Arts</div>
+                    <div class="edu-school">Wilkes Community College</div>
+                    <div class="edu-meta">
+                        <span><i class="fas fa-location-dot"></i> Wilkesboro, NC</span>
+                        <span><i class="fas fa-award"></i> President's List &times; 3</span>
+                    </div>
+                </div>
+            </div>
+            <div class="edu-bd">
+                <div class="gpa-row">
+                    <div class="gpa-box">
+                        <span class="gpa-num">3.95</span>
+                        <div class="gpa-lbl">Associate GPA</div>
+                    </div>
+                </div>
+                <p style="color:var(--text-secondary);font-size:0.93rem;line-height:1.8;">
+                    Completed general education requirements with near-perfect standing before transferring to UNCW to pursue the Information Technology degree and Cybersecurity concentration.
+                </p>
+            </div>
+        </div>
+
+        <div class="reveal">
+            <div class="skills-label">Honors &amp; Awards</div>
+            <div class="cert-list">
+                <div class="cert-row">
+                    <div class="cert-ico"><i class="fas fa-award"></i></div>
+                    <div>
+                        <div class="cert-name">President's List — Fall 2022</div>
+                        <div class="cert-sub">Wilkes Community College</div>
+                    </div>
+                </div>
+                <div class="cert-row">
+                    <div class="cert-ico"><i class="fas fa-award"></i></div>
+                    <div>
+                        <div class="cert-name">President's List — Spring 2022</div>
+                        <div class="cert-sub">Wilkes Community College</div>
+                    </div>
+                </div>
+                <div class="cert-row">
+                    <div class="cert-ico"><i class="fas fa-award"></i></div>
+                    <div>
+                        <div class="cert-name">President's List — Fall 2021</div>
+                        <div class="cert-sub">Wilkes Community College</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="reveal">
+            <div class="skills-label">Certifications</div>
+            <div class="cert-list">
+                <div class="cert-row">
+                    <div class="cert-ico"><i class="fas fa-certificate"></i></div>
+                    <div>
+                        <div class="cert-name">CompTIA Security+</div>
+                        <div class="cert-sub">Target: 2026 · Studying with Professor Messer & Jason Dion</div>
+                    </div>
+                    <span class="cert-pill cert-pill-active">In Progress</span>
+                </div>
+                <div class="cert-row">
+                    <div class="cert-ico"><i class="fas fa-certificate"></i></div>
+                    <div>
+                        <div class="cert-name">CompTIA A+</div>
+                        <div class="cert-sub">Planned credential — hardware & support baseline</div>
+                    </div>
+                    <span class="cert-pill cert-pill-plan">Planned</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- ===================== -->
+<!--    CONTACT            -->
+<!-- ===================== -->
+<div id="page-contact" class="page">
+    <div class="page-wrap">
+
+        <div class="page-hd reveal">
+            <span class="eyebrow">// get in touch</span>
+            <h2 class="page-title">Contact</h2>
+        </div>
+
+        <div class="contact-grid">
+            <div>
+                <p class="contact-intro reveal">
+                    I'm actively pursuing cybersecurity and IT opportunities in Wilmington and beyond. Whether it's a role, a project, or just a conversation — my inbox is open and I respond within 24 hours.
+                </p>
+                <div class="contact-links reveal">
+                    <a href="mailto:lipscombjosh19@gmail.com" class="clink">
+                        <div class="clink-ico"><i class="fas fa-envelope"></i></div>
+                        <div>
+                            <div class="clink-lbl">Email</div>
+                            <div class="clink-val">lipscombjosh19@gmail.com</div>
+                        </div>
+                        <span class="clink-arr"><i class="fas fa-arrow-right"></i></span>
+                    </a>
+                    <a href="https://www.linkedin.com/in/lipscombjosh/" target="_blank" class="clink">
+                        <div class="clink-ico"><i class="fab fa-linkedin"></i></div>
+                        <div>
+                            <div class="clink-lbl">LinkedIn</div>
+                            <div class="clink-val">linkedin.com/in/lipscombjosh</div>
+                        </div>
+                        <span class="clink-arr"><i class="fas fa-arrow-right"></i></span>
+                    </a>
+                    <!-- Update href with your actual GitHub URL -->
+                    <a href="https://github.com/" target="_blank" class="clink">
+                        <div class="clink-ico"><i class="fab fa-github"></i></div>
+                        <div>
+                            <div class="clink-lbl">GitHub</div>
+                            <div class="clink-val">github.com/[your-username]</div>
+                        </div>
+                        <span class="clink-arr"><i class="fas fa-arrow-right"></i></span>
+                    </a>
+                    <div class="clink" style="cursor:default;">
+                        <div class="clink-ico"><i class="fas fa-location-dot"></i></div>
+                        <div>
+                            <div class="clink-lbl">Location</div>
+                            <div class="clink-val">Wilmington, NC — Open to Remote</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="code-block reveal">
+                <span class="cmt">// candidate.json</span><br>
+                {<br>
+                &nbsp;&nbsp;<span class="key">"name"</span>: <span class="str">"Josh Lipscomb"</span>,<br>
+                &nbsp;&nbsp;<span class="key">"role"</span>: <span class="str">"IT &amp; Cybersecurity"</span>,<br>
+                &nbsp;&nbsp;<span class="key">"degree"</span>: <span class="str">"B.S. IT, UNCW '26"</span>,<br>
+                &nbsp;&nbsp;<span class="key">"location"</span>: <span class="str">"Wilmington, NC"</span>,<br>
+                &nbsp;&nbsp;<span class="key">"available"</span>: <span class="bool">true</span>,<br>
+                &nbsp;&nbsp;<span class="key">"remote_ready"</span>: <span class="bool">true</span>,<br>
+                &nbsp;&nbsp;<span class="key">"clearance_eligible"</span>: <span class="bool">true</span>,<br>
+                &nbsp;&nbsp;<span class="key">"security_plus"</span>: <span class="str">"in progress"</span>,<br>
+                &nbsp;&nbsp;<span class="key">"response_time"</span>: <span class="str">"&lt; 24 hours"</span><br>
+                }
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- ===================== -->
+<!--    PROJECT MODALS     -->
+<!-- ===================== -->
+
+<div class="modal-bg" id="m-fbi" onclick="bgClose(event,'m-fbi')">
+    <div class="modal-box">
+        <div class="modal-hd">
+            <div>
+                <div style="font-family:var(--font-mono);font-size:0.72rem;color:var(--cyan);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;">Cybersecurity · Group Project</div>
+                <div style="font-family:var(--font-display);font-size:1.25rem;font-weight:600;">FBI IC3 NIST Risk Assessment</div>
+            </div>
+            <button class="modal-close" onclick="closeModal('m-fbi')">&times;</button>
+        </div>
+        <div class="modal-bd">
+            <p>Conducted a comprehensive risk assessment of the FBI Internet Crime Complaint Center (IC3) system as part of a structured academic group project that replicated real-world federal security review processes.</p>
+            <p>Evaluated system compliance against FISMA and NIST SP 800-53 frameworks. Developed strategic assessment plans covering continuous monitoring, incident response, and risk mitigation to protect sensitive federal data at rest and in transit.</p>
+            <p>Analyzed 39 identified system vulnerabilities across varying severity levels — Low, Moderate, and High — and formulated a formal Authorization to Operate (ATO) recommendation grounded in calculated risk tolerance thresholds.</p>
+            <div class="proj-tags" style="margin-top:18px;">
+                <span class="proj-tag">NIST SP 800-53</span>
+                <span class="proj-tag">FISMA</span>
+                <span class="proj-tag">Risk Assessment</span>
+                <span class="proj-tag">ATO</span>
+                <span class="proj-tag">Incident Response</span>
+                <span class="proj-tag">Continuous Monitoring</span>
+                <span class="proj-tag">Vulnerability Analysis</span>
             </div>
         </div>
     </div>
 </div>
+
+<div class="modal-bg" id="m-seaview" onclick="bgClose(event,'m-seaview')">
+    <div class="modal-box">
+        <div class="modal-hd">
+            <div>
+                <div style="font-family:var(--font-mono);font-size:0.72rem;color:var(--cyan);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;">IT Consulting · Capstone Project</div>
+                <div style="font-family:var(--font-display);font-size:1.25rem;font-weight:600;">Seaview Crab Co. — POS Consolidation</div>
+            </div>
+            <button class="modal-close" onclick="closeModal('m-seaview')">&times;</button>
+        </div>
+        <div class="modal-bd">
+            <p>Served as technical consultant to Seaview Crab Company to evaluate and resolve a fragmented point-of-sale infrastructure spread across multiple locations.</p>
+            <p>Analyzed existing POS workflows, identified data silos causing reporting inaccuracies, and engineered data cleansing strategies to centralize customer and transaction records. Delivered formal system consolidation recommendations that improved both data integrity and client engagement capabilities.</p>
+            <p>This capstone project simulated a real IT consulting engagement — from stakeholder discovery through technical recommendation delivery — and sharpened skills in requirements analysis, workflow documentation, and communicating technical findings to a non-technical client.</p>
+            <div class="proj-tags" style="margin-top:18px;">
+                <span class="proj-tag">POS Systems</span>
+                <span class="proj-tag">Data Cleansing</span>
+                <span class="proj-tag">IT Consulting</span>
+                <span class="proj-tag">SQL</span>
+                <span class="proj-tag">Requirements Analysis</span>
+                <span class="proj-tag">System Architecture</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-bg" id="m-pc" onclick="bgClose(event,'m-pc')">
+    <div class="modal-box">
+        <div class="modal-hd">
+            <div>
+                <div style="font-family:var(--font-mono);font-size:0.72rem;color:var(--cyan);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;">Hardware · Personal Project</div>
+                <div style="font-family:var(--font-display);font-size:1.25rem;font-weight:600;">Custom PC Builds & Home Network</div>
+            </div>
+            <button class="modal-close" onclick="closeModal('m-pc')">&times;</button>
+        </div>
+        <div class="modal-bd">
+            <p>Built and maintained multiple custom desktop systems from scratch — handling component selection, compatibility research, physical assembly, cable management, BIOS configuration, and full OS deployment.</p>
+            <p>Also manages an in-wall home network infrastructure: structured cabling, patch panel termination, switch configuration, and wireless access point placement and coverage optimization. These are the same foundational skills used daily in professional device repair and network troubleshooting.</p>
+            <p style="font-family:var(--font-mono);font-size:0.8rem;color:var(--cyan);">// Upload your build photos to the project image slot above — they make this card stand out to recruiters.</p>
+            <div class="proj-tags" style="margin-top:18px;">
+                <span class="proj-tag">PC Hardware</span>
+                <span class="proj-tag">Networking</span>
+                <span class="proj-tag">BIOS Config</span>
+                <span class="proj-tag">OS Deployment</span>
+                <span class="proj-tag">Structured Cabling</span>
+                <span class="proj-tag">Cable Management</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- FOOTER -->
+<footer>
+    <span class="accent">josh.lipscomb</span> &nbsp;·&nbsp; Wilmington, NC &nbsp;·&nbsp; Built with purpose
+</footer>
+
+
+<!-- ===================== -->
+<!--    JAVASCRIPT         -->
+<!-- ===================== -->
+<script>
+// ---- PAGE NAVIGATION ----
+function go(name) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    const pg = document.getElementById('page-' + name);
+    if (pg) pg.classList.add('active');
+
+    document.querySelectorAll('[data-pg]').forEach(a => {
+        a.classList.toggle('active', a.dataset.pg === name);
+    });
+
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    setTimeout(runReveals, 60);
+}
+
+// ---- MOBILE DRAWER ----
+function toggleDrawer() {
+    document.getElementById('drawer').classList.toggle('open');
+    document.getElementById('burger').classList.toggle('open');
+}
+function closeDrawer() {
+    document.getElementById('drawer').classList.remove('open');
+    document.getElementById('burger').classList.remove('open');
+}
+
+// ---- MODALS ----
+function openModal(id) {
+    document.getElementById(id).classList.add('open');
+    document.body.style.overflow = 'hidden';
+}
+function closeModal(id) {
+    document.getElementById(id).classList.remove('open');
+    document.body.style.overflow = '';
+}
+function bgClose(e, id) {
+    if (e.target === e.currentTarget) closeModal(id);
+}
+
+// ---- TYPEWRITER ----
+const phrases = [
+    'Cybersecurity Professional',
+    'IT Technician',
+    'Endpoint Diagnostics',
+    'Hardware Specialist',
+    'Problem Solver',
+];
+let pi = 0, ci = 0, del = false;
+const tw = document.getElementById('tw');
+
+function type() {
+    const cur = phrases[pi];
+    if (!del) {
+        tw.textContent = cur.slice(0, ci + 1);
+        ci++;
+        if (ci === cur.length) { del = true; setTimeout(type, 2000); return; }
+    } else {
+        tw.textContent = cur.slice(0, ci - 1);
+        ci--;
+        if (ci === 0) { del = false; pi = (pi + 1) % phrases.length; }
+    }
+    setTimeout(type, del ? 48 : 88);
+}
+setTimeout(type, 1400);
+
+// ---- PARTICLE CANVAS ----
+const canvas = document.getElementById('hero-canvas');
+const ctx    = canvas.getContext('2d');
+let pts = [], raf;
+
+function sizeCanvas() {
+    canvas.width  = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+
+class Pt {
+    constructor() { this.init(); }
+    init() {
+        this.x  = Math.random() * canvas.width;
+        this.y  = Math.random() * canvas.height;
+        this.vx = (Math.random() - 0.5) * 0.38;
+        this.vy = (Math.random() - 0.5) * 0.38;
+        this.r  = Math.random() * 1.4 + 0.4;
+        this.a  = Math.random() * 0.45 + 0.08;
+    }
+    update() {
+        this.x += this.vx; this.y += this.vy;
+        if (this.x < 0 || this.x > canvas.width)  this.vx *= -1;
+        if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+    }
+    draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(59,130,246,${this.a})`;
+        ctx.fill();
+    }
+}
+
+function buildPts() {
+    const n = Math.min(90, Math.floor(canvas.width * canvas.height / 10000));
+    pts = Array.from({ length: n }, () => new Pt());
+}
+
+function lines() {
+    const DIST = 130;
+    for (let i = 0; i < pts.length; i++) {
+        for (let j = i + 1; j < pts.length; j++) {
+            const dx = pts[i].x - pts[j].x, dy = pts[i].y - pts[j].y;
+            const d  = Math.sqrt(dx * dx + dy * dy);
+            if (d < DIST) {
+                ctx.beginPath();
+                ctx.moveTo(pts[i].x, pts[i].y);
+                ctx.lineTo(pts[j].x, pts[j].y);
+                ctx.strokeStyle = `rgba(59,130,246,${0.14 * (1 - d / DIST)})`;
+                ctx.lineWidth = 0.6;
+                ctx.stroke();
+            }
+        }
+    }
+}
+
+function tick() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    pts.forEach(p => { p.update(); p.draw(); });
+    lines();
+    raf = requestAnimationFrame(tick);
+}
+
+sizeCanvas(); buildPts(); tick();
+window.addEventListener('resize', () => { sizeCanvas(); buildPts(); });
+
+// ---- SCROLL REVEAL ----
+function runReveals() {
+    const els = document.querySelectorAll('.page.active .reveal');
+    if (!els.length) return;
+
+    const io = new IntersectionObserver((entries) => {
+        entries.forEach((e, i) => {
+            if (e.isIntersecting) {
+                setTimeout(() => e.target.classList.add('in'), i * 80);
+                io.unobserve(e.target);
+            }
+        });
+    }, { threshold: 0.08 });
+
+    els.forEach(el => {
+        if (!el.classList.contains('in')) io.observe(el);
+    });
+}
+
+runReveals();
+window.addEventListener('scroll', runReveals, { passive: true });
+
+// ---- KEYBOARD ESC closes modals ----
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+        document.querySelectorAll('.modal-bg.open').forEach(m => {
+            m.classList.remove('open');
+            document.body.style.overflow = '';
+        });
+    }
+});
+</script>
 
 </body>
 </html>
